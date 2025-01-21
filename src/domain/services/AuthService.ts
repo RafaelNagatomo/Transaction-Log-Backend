@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import UserRepository from '../../domain/repositories/UserRepository'
 import User from '../entities/User'
-
+import JwtUtils from '../../infra/utils/jwtUtils'
 
 class AuthService {
   private readonly userRepository: UserRepository
-  constructor() {
-      this.userRepository = new UserRepository()
-    }
+
+  constructor(userRepository: UserRepository) {
+    this.userRepository = userRepository
+  }
 
   async register(name: string, email: string, password: string): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10)
@@ -19,14 +19,12 @@ class AuthService {
   async login(email: string, password: string): Promise<string> {
     const user = await this.userRepository.findByEmail(email)
     if (!user) throw new Error('User not found')
+    if (!user.id) throw new Error('User ID is undefined')
 
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword) throw new Error('Invalid password')
 
-    if (!process.env.JWT_SECRET) {
-      throw new Error('JWT_SECRET is not defined');
-    }
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '2h' })
+    const token = JwtUtils.generateToken(user.id)
     return token
   }
 

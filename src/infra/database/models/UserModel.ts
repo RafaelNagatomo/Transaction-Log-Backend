@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import User from '../../../domain/entities/User';
+import User from '../../../domain/entities/User'
 
 const UserSchema = new Schema<User>(
   {
@@ -8,7 +8,7 @@ const UserSchema = new Schema<User>(
     password: { type: String, required: true },
   },
   { timestamps: true }
-);
+)
 
 const UserModel = model<User>('User', UserSchema)
 

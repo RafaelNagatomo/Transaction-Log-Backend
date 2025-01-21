@@ -5,11 +5,11 @@ class UserRepository {
     throw new Error('createUser Not implemented')
   }
   async findByEmail(email: string): Promise<User | null> {
-    throw new Error('Method not implemented');
+    throw new Error('Method not implemented')
   }
 
   async findById(id: string): Promise<User | null> {
-    throw new Error('Method not implemented');
+    throw new Error('Method not implemented')
   }
 }
 

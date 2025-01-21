@@ -5,9 +5,11 @@ import JwtUtils from '../../infra/utils/jwtUtils'
 
 class AuthService {
   private readonly userRepository: UserRepository
+  tokenBlacklist: string[]
 
   constructor(userRepository: UserRepository) {
     this.userRepository = userRepository
+    this.tokenBlacklist = []
   }
 
   async register(name: string, email: string, password: string): Promise<User> {
@@ -28,7 +30,11 @@ class AuthService {
   }
 
   async logout(token: string): Promise<void> {
-    // Implementar lógica de logout, como adicionar o token a uma blacklist
+    this.tokenBlacklist.push(token)
+  }
+
+  async isTokenBlacklisted(token: string): Promise<boolean> {
+    return this.tokenBlacklist.includes(token);
   }
 }
 

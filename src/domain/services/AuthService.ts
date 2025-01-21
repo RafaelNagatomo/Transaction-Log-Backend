@@ -19,12 +19,11 @@ class AuthService {
   async login(email: string, password: string): Promise<string> {
     const user = await this.userRepository.findByEmail(email)
     if (!user) throw new Error('User not found')
-    if (!user.id) throw new Error('User ID is undefined')
 
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword) throw new Error('Invalid password')
 
-    const token = JwtUtils.generateToken(user.id)
+    const token = JwtUtils.generateToken({ user: user.id })
     return token
   }
 

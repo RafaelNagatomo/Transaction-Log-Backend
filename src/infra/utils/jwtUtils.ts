@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-const generateToken = (payload: string) => {
+const generateToken = (payload: object) => {
   if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET is not defined')
   }

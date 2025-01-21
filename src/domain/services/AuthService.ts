@@ -5,20 +5,31 @@ import JwtUtils from '../../infra/utils/jwtUtils'
 
 class AuthService {
   private readonly userRepository: UserRepository
-  tokenBlacklist: string[]
+  public tokenBlacklist: string[]
 
   constructor(userRepository: UserRepository) {
     this.userRepository = userRepository
     this.tokenBlacklist = []
   }
 
-  async register(name: string, email: string, password: string): Promise<User> {
+  async register(
+    name: string,
+    email: string,
+    password: string
+  ): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10)
-    const user = await this.userRepository.createUser({ name, email, password: hashedPassword })
+    const user = await this.userRepository.createUser({
+      name,
+      email,
+      password: hashedPassword
+    })
     return user
   }
 
-  async login(email: string, password: string): Promise<string> {
+  async login(
+    email: string,
+    password: string
+  ): Promise<string> {
     const user = await this.userRepository.findByEmail(email)
     if (!user) throw new Error('User not found')
 
@@ -34,7 +45,7 @@ class AuthService {
   }
 
   async isTokenBlacklisted(token: string): Promise<boolean> {
-    return this.tokenBlacklist.includes(token);
+    return this.tokenBlacklist.includes(token)
   }
 }
 

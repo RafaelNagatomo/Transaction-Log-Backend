@@ -16,7 +16,7 @@ class UserRepositoryMongo implements UserRepository {
   async findByEmail(email: string): Promise<User | null> {
     try {
       const user = await UserModel.findOne({ email }).exec()
-      return user ? user.toObject() : null;
+      return user ? user.toObject() : null
     } catch (error) {
       console.error('Error finding user by email:', error)
       throw new Error('Failed to find user by email')

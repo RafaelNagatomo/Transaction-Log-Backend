@@ -8,7 +8,11 @@ class RegisterUser {
     this.authService = authService
   }
   
-  async execute(name: string, email: string, password: string): Promise<User> {
+  async execute(
+    name: string,
+    email: string,
+    password: string
+  ): Promise<User> {
     return this.authService.register(name, email, password)
   }
 }

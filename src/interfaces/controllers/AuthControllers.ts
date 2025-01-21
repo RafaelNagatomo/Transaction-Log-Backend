@@ -8,7 +8,11 @@ class AuthController {
   private loginUser: LoginUser
   private logoutUser: LogoutUser
 
-  constructor(registerUser: RegisterUser, loginUser: LoginUser, logoutUser: LogoutUser) {
+  constructor(
+    registerUser: RegisterUser,
+    loginUser: LoginUser,
+    logoutUser: LogoutUser
+  ) {
     this.registerUser = registerUser
     this.loginUser = loginUser
     this.logoutUser = logoutUser

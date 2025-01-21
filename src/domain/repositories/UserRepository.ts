@@ -1,21 +1,16 @@
 import User from "../entities/User"
 
 class UserRepository {
-    async getUserById(id: string): Promise<User> {
-        throw new Error('getUserById Not implemented')
-    }
-    async getUserByEmail(email: string): Promise<User> {
-        throw new Error('getUserByEmail Not implemented')
-    }
-    async createUser(user: User): Promise<User> {
-        throw new Error('createUser Not implemented')
-    }
-    async updateUser(user: User): Promise<User> {
-        throw new Error('updateUser Not implemented')
-    }
-    async deleteUser(id: string): Promise<void> {
-        throw new Error('deleteUser Not implemented')
-    }
+  async createUser(user: User): Promise<User> {
+    throw new Error('createUser Not implemented')
+  }
+  async findByEmail(email: string): Promise<User | null> {
+    throw new Error('Method not implemented');
+  }
+
+  async findById(id: string): Promise<User | null> {
+    throw new Error('Method not implemented');
+  }
 }
 
 export default UserRepository

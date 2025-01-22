@@ -17,13 +17,18 @@ class AuthService {
     email: string,
     password: string
   ): Promise<User> {
-    const hashedPassword = await bcrypt.hash(password, 10)
-    const user = await this.userRepository.createUser({
-      name,
-      email,
-      password: hashedPassword
-    })
-    return user
+    try{
+      const hashedPassword = await bcrypt.hash(password, 10)
+      const user = await this.userRepository.createUser({
+        name,
+        email,
+        password: hashedPassword
+      })
+      return user
+    } catch (error) {
+      console.error('Error during registration:', error)
+      throw new Error('Registration failed')
+    }
   }
 
   async login(

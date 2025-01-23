@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
-import UserRepositoryMongo from '../../infra/repositories/UserRepositoryMongo'
 import User from '../entities/User'
-import JwtUtils from '../../infra/utils/jwtUtils'
+import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
+import JwtUtils from '~/infrastructure/utils/jwtUtils'
 
 class AuthService {
   private readonly userRepositoryMongo: UserRepositoryMongo

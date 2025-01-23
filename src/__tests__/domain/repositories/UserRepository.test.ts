@@ -1,8 +1,8 @@
-import User from "../../../domain/entities/User"
-import UserRepository from "../../../domain/repositories/UserRepository"
+import User from "~/domain/entities/User"
+import IUserRepository from "~/domain/repositories/IUserRepository"
 
 describe("UserRepository (Domain Interface)", () => {
-  let userRepository: UserRepository
+  let userRepository: IUserRepository
   let mockUser: User
 
   beforeEach(() => {

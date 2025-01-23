@@ -1,7 +1,7 @@
 import express from 'express'
-import connectDB from './infra/config/database'
 import dotenv from 'dotenv'
-import authRoutes from './interfaces/routes/authRoutes'
+import connectDB from '~/infrastructure/config/database'
+import authRoutes from '~/presentation/routes/authRoutes'
 
 dotenv.config()
 const PORT = process.env.PORT || 4000

@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt'
-import UserRepository from '../../domain/repositories/UserRepository'
+import UserRepositoryMongo from '../../infra/repositories/UserRepositoryMongo'
 import User from '../entities/User'
 import JwtUtils from '../../infra/utils/jwtUtils'
 
 class AuthService {
-  private readonly userRepository: UserRepository
+  private readonly userRepositoryMongo: UserRepositoryMongo
   public tokenBlacklist: string[]
 
-  constructor(userRepository: UserRepository) {
-    this.userRepository = userRepository
+  constructor(userRepositoryMongo: UserRepositoryMongo) {
+    this.userRepositoryMongo = userRepositoryMongo
     this.tokenBlacklist = []
   }
 
@@ -19,7 +19,7 @@ class AuthService {
   ): Promise<User> {
     try{
       const hashedPassword = await bcrypt.hash(password, 10)
-      const user = await this.userRepository.createUser({
+      const user = await this.userRepositoryMongo.createUser({
         name,
         email,
         password: hashedPassword
@@ -35,7 +35,7 @@ class AuthService {
     email: string,
     password: string
   ): Promise<string> {
-    const user = await this.userRepository.findByEmail(email)
+    const user = await this.userRepositoryMongo.findByEmail(email)
     if (!user) throw new Error('User not found')
 
     const isValidPassword = await bcrypt.compare(password, user.password)

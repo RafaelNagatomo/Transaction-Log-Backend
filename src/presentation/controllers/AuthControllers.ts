@@ -3,7 +3,7 @@ import RegisterUserUseCase from '~/application/auth/RegisterUserUseCase'
 import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
 import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'
 
-class AuthController {
+export default class AuthController {
   private registerUserUseCase: RegisterUserUseCase
   private loginUserUseCase: LoginUserUseCase
   private logoutUserUseCase: LogoutUserUseCase
@@ -54,5 +54,3 @@ class AuthController {
     }
   }
 }
-
-export default AuthController

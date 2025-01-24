@@ -1,7 +1,7 @@
 import User from "~/domain/entities/User"
 import AuthService from "~/domain/services/AuthService"
 
-class RegisterUserUseCase {
+export default class RegisterUserUseCase {
   private readonly authService: AuthService
 
   constructor(authService: AuthService) {
@@ -16,5 +16,3 @@ class RegisterUserUseCase {
     return this.authService.register(name, email, password)
   }
 }
-  
-export default RegisterUserUseCase

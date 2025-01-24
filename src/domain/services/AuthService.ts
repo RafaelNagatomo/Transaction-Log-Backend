@@ -3,7 +3,7 @@ import User from '../entities/User'
 import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
 import JwtUtils from '~/infrastructure/utils/jwtUtils'
 
-class AuthService {
+export default class AuthService {
   private readonly userRepositoryMongo: UserRepositoryMongo
   public tokenBlacklist: string[]
 
@@ -53,5 +53,3 @@ class AuthService {
     return this.tokenBlacklist.includes(token)
   }
 }
-
-export default AuthService

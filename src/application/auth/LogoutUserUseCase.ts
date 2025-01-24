@@ -1,6 +1,6 @@
 import AuthService from "~/domain/services/AuthService"
 
-class LogoutUserUseCase {
+export default class LogoutUserUseCase {
   private readonly authService: AuthService
   constructor(authService: AuthService) {
     this.authService = authService
@@ -10,5 +10,3 @@ class LogoutUserUseCase {
     return this.authService.logout(token)
   }
 }
-  
-export default LogoutUserUseCase

@@ -2,7 +2,7 @@ import User from "~/domain/entities/User"
 import IUserRepository from "~/domain/repositories/IUserRepository"
 import UserModel from "../database/models/UserModel"
 
-class UserRepositoryMongo implements IUserRepository {
+export default class UserRepositoryMongo implements IUserRepository {
   async createUser(user: User): Promise<User> {
     try {
       const createdUser = await UserModel.create(user)
@@ -33,5 +33,3 @@ class UserRepositoryMongo implements IUserRepository {
     }
   }
 }
-
-export default UserRepositoryMongo

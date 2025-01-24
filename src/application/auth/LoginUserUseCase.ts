@@ -1,6 +1,6 @@
 import AuthService from "~/domain/services/AuthService"
 
-class LoginUserUseCase {
+export default class LoginUserUseCase {
   private readonly authService: AuthService
   constructor(authService: AuthService) {
     this.authService = authService
@@ -10,5 +10,3 @@ class LoginUserUseCase {
     return this.authService.login(email, password)
   }
 }
-  
-export default LoginUserUseCase

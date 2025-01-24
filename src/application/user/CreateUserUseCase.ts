@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import User from '~/domain/entities/User'
 import IUserRepository from '~/domain/repositories/IUserRepository'
 
-class CreateUserUseCase {
+export default class CreateUserUseCase {
   constructor(private iUserRepository: IUserRepository) {}
 
   async execute(user: User): Promise<User> {
@@ -11,5 +11,3 @@ class CreateUserUseCase {
     return this.iUserRepository.createUser(newUser)
   }
 }
-
-export default CreateUserUseCase

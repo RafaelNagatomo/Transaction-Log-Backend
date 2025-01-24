@@ -1,4 +1,4 @@
-class User {
+export default class User {
   readonly id?: string
   readonly name: string
   readonly email: string
@@ -17,5 +17,3 @@ class User {
   }
 
 }
-
-export default User

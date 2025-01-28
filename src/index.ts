@@ -1,8 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import connectDB from '~/infrastructure/config/database'
-import authRoutes from '~/presentation/routes/authRoutes'
 import cors from 'cors'
+import connectDB from '~/infrastructure/database/config/database'
+import authRoutes from '~/presentation/routes/authRoutes'
+import transactionRoutes from './presentation/routes/transactionRoutes'
 
 dotenv.config()
 const PORT = process.env.PORT || 4000
@@ -12,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/auth', authRoutes)
+app.use('/transactions', transactionRoutes)
 
 connectDB()
 

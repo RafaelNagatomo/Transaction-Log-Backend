@@ -6,7 +6,7 @@ import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
 import AuthController from '../controllers/AuthControllers'
 import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'
 
-const authRoutes: Router = Router()
+const authRouter: Router = Router()
 
 const userRepositoryMongo = new UserRepositoryMongo()
 const authService = new AuthService(userRepositoryMongo)
@@ -15,8 +15,8 @@ const loginUserUseCase = new LoginUserUseCase(authService)
 const logoutUserUseCase = new LogoutUserUseCase(authService)
 const authController = new AuthController(registerUserUseCase, loginUserUseCase, logoutUserUseCase)
 
-authRoutes.post('/register', authController.register.bind(authController))
-authRoutes.post('/login', authController.login.bind(authController))
-authRoutes.post('/logout', authController.logout.bind(authController))
+authRouter.post('/register', authController.register.bind(authController))
+authRouter.post('/login', authController.login.bind(authController))
+authRouter.post('/logout', authController.logout.bind(authController))
 
-export default authRoutes
+export default authRouter

@@ -34,15 +34,19 @@ export default class AuthService {
   async login(
     email: string,
     password: string
-  ): Promise<string> {
+  ): Promise<{ user: User; token: string }> {
     const user = await this.userRepositoryMongo.findByEmail(email)
     if (!user) throw new Error('User not found')
 
+    if (!user.password) throw new Error('User password is undefined')
+      
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword) throw new Error('Invalid password')
 
+    const { password: _, ...userWithoutPassword } = user
+
     const token = JwtUtils.generateToken({ user: user.id })
-    return token
+    return { user: userWithoutPassword, token }
   }
 
   async logout(token: string): Promise<void> {

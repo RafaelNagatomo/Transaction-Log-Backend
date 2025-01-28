@@ -3,6 +3,7 @@ import Transaction from '~/domain/entities/Transaction'
 
 const TransactionSchema = new Schema<Transaction>(
   {
+    user: { type: Object, required: true },
     type: { type: String, enum: ['income', 'outcome'], required: true },
     amount: { type: Number, required: true},
     description: { type: String, required: true },

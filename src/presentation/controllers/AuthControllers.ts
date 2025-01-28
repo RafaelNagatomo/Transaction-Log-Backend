@@ -31,8 +31,8 @@ export default class AuthController {
   async login(req: Request, res: Response): Promise<void> {
     const { email, password } = req.body
     try {
-      const token = await this.loginUserUseCase.execute(email, password)
-      res.status(200).json({ token })
+      const data = await this.loginUserUseCase.execute(email, password)
+      res.status(200).json(data)
     } catch (error: any) {
       res.status(400).json({ error: error.message })
     }

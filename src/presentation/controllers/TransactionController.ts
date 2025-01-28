@@ -27,8 +27,9 @@ export default class TransactionController {
   }
 
   async create(req: Request, res: Response): Promise<void> {
-    const { type, amount, description, status = 'pending', isActive = true } = req.body
+    const { user, type, amount, description, status = 'pending', isActive = true } = req.body
     const createTransaction = await this.createTransactionUseCase.execute({
+      user,
       type,
       amount,
       description,
@@ -50,9 +51,10 @@ export default class TransactionController {
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    const { _id, type, amount, description, status, isActive } = req.body
+    const { _id, user, type, amount, description, status, isActive } = req.body
     const updateTransaction = await this.updateTransactionUseCase.execute({
       _id,
+      user,
       type,
       amount,
       description,

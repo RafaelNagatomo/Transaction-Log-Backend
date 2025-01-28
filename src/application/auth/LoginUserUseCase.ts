@@ -1,3 +1,4 @@
+import User from "~/domain/entities/User";
 import AuthService from "~/domain/services/AuthService"
 
 export default class LoginUserUseCase {
@@ -6,7 +7,7 @@ export default class LoginUserUseCase {
     this.authService = authService
   }
 
-  async execute(email: string, password: string): Promise<string> {
+  async execute(email: string, password: string): Promise<{ user: User; token: string }> {
     return this.authService.login(email, password)
   }
 }

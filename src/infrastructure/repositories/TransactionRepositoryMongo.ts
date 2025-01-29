@@ -15,7 +15,10 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
 
   async findAllTransactions(): Promise<Transaction[]> {
     try {
-      const transactions = await TransactionModel.find().exec()
+      const transactions = await TransactionModel.find()
+      .sort({ createdAt: -1 })
+      .exec()
+
       return transactions.map(transaction => transaction.toObject())
     } catch (error) {
       console.error('Error to get all transactions:', error)

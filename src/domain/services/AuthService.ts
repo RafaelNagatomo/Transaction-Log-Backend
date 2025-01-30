@@ -35,7 +35,10 @@ export default class AuthService {
   async login(
     email: string,
     password: string
-  ): Promise<{ user: User; token: string }> {
+  ): Promise<{
+    user: User
+    token: string
+  }> {
     const user = await this.userRepositoryMongo.findByEmail(email)
     if (!user) throw new Error('User not found')
 

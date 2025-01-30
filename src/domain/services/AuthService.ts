@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import User from '../entities/User'
 import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
 import JwtUtils from '~/infrastructure/utils/jwtUtils'
+import { userService } from './UserService'
 
 export default class AuthService {
   private readonly userRepositoryMongo: UserRepositoryMongo
@@ -45,11 +46,12 @@ export default class AuthService {
 
     const { password: _, ...userWithoutPassword } = user
 
-    const token = JwtUtils.generateToken({ user: user.id })
+    const token = JwtUtils.generateToken({ user: user })
     return { user: userWithoutPassword, token }
   }
 
   async logout(token: string): Promise<void> {
+    userService.clearUser()
     this.tokenBlacklist.push(token)
   }
 

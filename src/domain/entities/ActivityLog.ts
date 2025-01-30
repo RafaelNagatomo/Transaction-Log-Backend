@@ -2,7 +2,7 @@ import User from "./User"
 
 export default class ActivityLog {
   readonly _id?: string
-  readonly eventType: string
+  readonly eventType: 'Transaction' | 'User'
   readonly action: string
   readonly oldData: JSON
   readonly newData: JSON

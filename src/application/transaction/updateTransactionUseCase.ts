@@ -9,6 +9,10 @@ export default class UpdateTransactionUseCase {
     clientIp: string, 
     userAgent: string
   ): Promise<Transaction | null> {
-    return this.transactionRepositoryMongo.updateTransaction(transaction, clientIp, userAgent)
+    return this.transactionRepositoryMongo.updateTransaction(
+      transaction,
+      clientIp,
+      userAgent
+    )
   }
 }

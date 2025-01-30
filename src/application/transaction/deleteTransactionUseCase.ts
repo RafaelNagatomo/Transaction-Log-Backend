@@ -9,6 +9,10 @@ export default class DeleteTransactionUseCase {
     clientIp: string, 
     userAgent: string
   ): Promise<Transaction | null> {
-    return this.transactionRepositoryMongo.deleteTransaction(id, clientIp, userAgent)
+    return this.transactionRepositoryMongo.deleteTransaction(
+      id,
+      clientIp,
+      userAgent
+    )
   }
 }

@@ -19,6 +19,7 @@ export default class ActivityLogRepositoryMongo implements IActivityLogRepositor
   async logAction(logData: ActivityLog): Promise<ActivityLog> {
     try {
       const newActivityLog = await ActivityLogModel.create(logData)
+      
       return newActivityLog
     } catch (error) {
       console.error('Error to create log:', error)

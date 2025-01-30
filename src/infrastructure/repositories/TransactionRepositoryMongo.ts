@@ -50,7 +50,10 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
 
   async findTransactionById(id: string): Promise<Transaction | null> {
     try {
-      const transaction = await TransactionModel.findById(id).exec()
+      const transaction = await TransactionModel
+      .findById(id)
+      .exec()
+      
       return transaction ? transaction.toObject() : null
     } catch (error) {
       console.error('Error to get transaction:', error)
@@ -110,7 +113,9 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
         throw new Error('Failed to get old transaction')
       }
 
-      const deletedTransaction = await TransactionModel.findByIdAndDelete(id).exec()
+      const deletedTransaction = await TransactionModel
+      .findByIdAndDelete(id)
+      .exec()
 
       if (deletedTransaction) {
         eventEmitter.emit("transactionDeleted", {

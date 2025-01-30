@@ -28,7 +28,15 @@ export default class TransactionController {
   }
 
   async create(req: Request, res: Response): Promise<void> {
-    const { createdBy, type, amount, description, status = 'pending', isActive = true } = req.body
+    const {
+      createdBy,
+      type,
+      amount,
+      description,
+      status = 'pending',
+      isActive = true
+    } = req.body
+
     const { clientIp, userAgent } = getClientInfo(req)
 
     const createTransaction = await this.createTransactionUseCase.execute({
@@ -55,11 +63,21 @@ export default class TransactionController {
   async getById(req: Request, res: Response): Promise<void> {
     const { id } = req.body
     const getTransaction = await this.findTransactionByIdUseCase.execute(id)
+
     res.status(200).json(getTransaction)
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    const { _id, createdBy, type, amount, description, status, isActive } = req.body
+    const {
+      _id,
+      createdBy,
+      type,
+      amount,
+      description,
+      status,
+      isActive
+    } = req.body
+
     const { clientIp, userAgent } = getClientInfo(req)
     
     const updateTransaction = await this.updateTransactionUseCase.execute({
@@ -74,6 +92,7 @@ export default class TransactionController {
       clientIp,
       userAgent
     )
+
     res.status(200).json(updateTransaction)
   }
 
@@ -86,6 +105,7 @@ export default class TransactionController {
       clientIp,
       userAgent
     )
+    
     res.status(200).json(getTransaction)
   }
 }

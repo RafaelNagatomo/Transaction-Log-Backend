@@ -2,6 +2,7 @@ import AuthService from "~/domain/services/AuthService"
 
 export default class LogoutUserUseCase {
   private readonly authService: AuthService
+  
   constructor(authService: AuthService) {
     this.authService = authService
   }

@@ -11,11 +11,10 @@ const findAllLogsUseCase = new FindAllLogsUseCase(activityLogRepositoryMongo)
 const logActionUseCase = new LogActionUseCase(activityLogRepositoryMongo)
 
 const activityLogController = new ActivityLogController(
-    findAllLogsUseCase,
-    logActionUseCase
+  findAllLogsUseCase,
+  logActionUseCase
 )
 
 activityLogRouter.get('/', activityLogController.getAll.bind(activityLogController))
-activityLogRouter.post('/create', activityLogController.create.bind(activityLogController))
 
 export default activityLogRouter

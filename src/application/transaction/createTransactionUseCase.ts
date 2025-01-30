@@ -18,6 +18,10 @@ export default class CreateTransactionUseCase {
       throw new Error('Transaction already exists')
     }
 
-    return this.transactionRepositoryMongo.createTransaction(transaction, clientIp, userAgent)
+    return this.transactionRepositoryMongo.createTransaction(
+      transaction,
+      clientIp,
+      userAgent
+    )
   }
 }

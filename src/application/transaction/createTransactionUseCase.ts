@@ -4,7 +4,11 @@ import TransactionRepositoryMongo from "~/infrastructure/repositories/Transactio
 export default class CreateTransactionUseCase {
   constructor(private transactionRepositoryMongo: TransactionRepositoryMongo) {}
     
-  async execute(transaction: Transaction): Promise<Transaction> {
+  async execute(
+    transaction: Transaction,
+    clientIp: string, 
+    userAgent: string
+  ): Promise<Transaction | null> {
     const allTransactions = await this.transactionRepositoryMongo.findAllTransactions()
     const transactionAlreadyExists = allTransactions.find(t =>
       t.description === transaction.description
@@ -14,6 +18,6 @@ export default class CreateTransactionUseCase {
       throw new Error('Transaction already exists')
     }
 
-    return this.transactionRepositoryMongo.createTransaction(transaction)
+    return this.transactionRepositoryMongo.createTransaction(transaction, clientIp, userAgent)
   }
 }

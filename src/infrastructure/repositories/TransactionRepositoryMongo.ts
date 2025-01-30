@@ -1,11 +1,33 @@
 import Transaction from "~/domain/entities/Transaction"
 import ITransactionRepository from "~/domain/repositories/ITransactionRepository"
 import TransactionModel from "../database/models/TransactionModel"
+import { eventEmitter } from "../events/eventEmitter"
+import { userService } from "~/domain/services/UserService"
 
 export default class TransactionRepositoryMongo implements ITransactionRepository {
-  async createTransaction(transaction: Transaction): Promise<Transaction> {
+  async createTransaction(
+    transaction: Transaction,
+    clientIp: string, 
+    userAgent: string
+  ): Promise<Transaction | null> {
     try {
+      const currentUser = userService.getUser()
+      
       const newTransaction = await TransactionModel.create(transaction)
+      
+      if (newTransaction) {
+        eventEmitter.emit("transactionCreated", {
+          eventType: 'Transaction',
+          action: 'Create',
+          oldData: null,
+          newData: newTransaction.toObject(),
+          changedBy: currentUser?.user,
+          changedAt: Date.now(),
+          clientIp: clientIp,
+          userAgent: userAgent
+        })
+      }
+
       return newTransaction.toObject()
     } catch (error) {
       console.error('Error creating transaction:', error)
@@ -36,13 +58,38 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
     }
   }
 
-  async updateTransaction(transaction: Transaction): Promise<Transaction | null> {
+  async updateTransaction(
+    transaction: Transaction,
+    clientIp: string, 
+    userAgent: string
+  ): Promise<Transaction | null> {
     try {
+      const currentUser = userService.getUser()
+
+      const oldTransaction = await TransactionModel.findById(transaction._id)
+      if (!oldTransaction) {
+        throw new Error('Failed to get old transaction')
+      }
+
       const updatedTransaction = await TransactionModel.findByIdAndUpdate(
         transaction._id,
         { ...transaction },
         { new: true }
       ).exec()
+
+      if (updatedTransaction) {
+        eventEmitter.emit("transactionUpdated", {
+          eventType: 'Transaction',
+          action: 'Update',
+          oldData: oldTransaction.toObject(),
+          newData: updatedTransaction.toObject(),
+          changedBy: currentUser?.user,
+          changedAt: Date.now(),
+          clientIp: clientIp,
+          userAgent: userAgent
+        })
+      }
+
       return updatedTransaction ? updatedTransaction.toObject() : null
     } catch (error) {
       console.error('Error to update transaction:', error)
@@ -50,10 +97,35 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
     }
   }
 
-  async deleteTransaction(id: string): Promise<Transaction | null> {
+  async deleteTransaction(
+    id: string,
+    clientIp: string, 
+    userAgent: string
+  ): Promise<Transaction | null> {
     try {
-      const transaction = await TransactionModel.findByIdAndDelete(id).exec()
-      return transaction
+      const currentUser = userService.getUser()
+
+      const oldTransaction = await TransactionModel.findById(id)
+      if (!oldTransaction) {
+        throw new Error('Failed to get old transaction')
+      }
+
+      const deletedTransaction = await TransactionModel.findByIdAndDelete(id).exec()
+
+      if (deletedTransaction) {
+        eventEmitter.emit("transactionDeleted", {
+          eventType: 'Transaction',
+          action: 'Delete',
+          oldData: oldTransaction.toObject(),
+          newData: null,
+          changedBy: currentUser?.user,
+          changedAt: Date.now(),
+          clientIp: clientIp,
+          userAgent: userAgent
+        })
+      }
+
+      return deletedTransaction
     } catch (error) {
       console.error('Error to delete transaction:', error)
       throw new Error('Failed to delete transaction')

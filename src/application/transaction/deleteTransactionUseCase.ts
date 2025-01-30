@@ -4,7 +4,11 @@ import TransactionRepositoryMongo from "~/infrastructure/repositories/Transactio
 export default class DeleteTransactionUseCase {
   constructor(private transactionRepositoryMongo: TransactionRepositoryMongo) {}
     
-  async execute(id: string): Promise<Transaction | null> {
-    return this.transactionRepositoryMongo.deleteTransaction(id)
+  async execute(
+    id: string,
+    clientIp: string, 
+    userAgent: string
+  ): Promise<Transaction | null> {
+    return this.transactionRepositoryMongo.deleteTransaction(id, clientIp, userAgent)
   }
 }

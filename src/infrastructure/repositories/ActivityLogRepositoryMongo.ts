@@ -5,7 +5,10 @@ import ActivityLogModel from "../database/models/ActivityLogModel"
 export default class ActivityLogRepositoryMongo implements IActivityLogRepository {
   async findAllLogs(): Promise<ActivityLog[]> {
     try {
-      const ActivityLogs = await ActivityLogModel.find().exec()
+      const ActivityLogs = await ActivityLogModel.find()
+      .sort({ changedAt: -1 })
+      .exec()
+
       return ActivityLogs.map(log => log.toObject())
     } catch (error) {
       console.error('Error to get all logs:', error)

@@ -2,35 +2,35 @@ import User from "./User"
 
 export default class ActivityLog {
   readonly _id?: string
-  readonly event_type: string
+  readonly eventType: string
   readonly action: string
-  readonly old_data: JSON
-  readonly new_data: JSON
-  readonly changed_by: User
-  readonly changed_at: Date
-  readonly client_ip: string
-  readonly user_agent: object
+  readonly oldData: JSON
+  readonly newData: JSON
+  readonly changedBy: User
+  readonly changedAt: Date
+  readonly clientIp: string
+  readonly userAgent: object
   readonly createdAt?: Date
   readonly updatedAt?: Date
 
   constructor({
-    event_type,
+    eventType,
     action,
-    old_data,
-    new_data,
-    changed_by,
-    changed_at,
-    client_ip,
-    user_agent
+    oldData,
+    newData,
+    changedBy,
+    changedAt,
+    clientIp,
+    userAgent
   }: ActivityLog) {
 
-    this.event_type = event_type
+    this.eventType = eventType
     this.action = action
-    this.old_data = old_data
-    this.new_data = new_data
-    this.changed_by = changed_by
-    this.changed_at = changed_at
-    this.client_ip = client_ip
-    this.user_agent = user_agent
+    this.oldData = oldData
+    this.newData = newData
+    this.changedBy = changedBy
+    this.changedAt = changedAt
+    this.clientIp = clientIp
+    this.userAgent = userAgent
   }
 }

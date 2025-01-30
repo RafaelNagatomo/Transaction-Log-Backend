@@ -21,25 +21,25 @@ export default class ActivityLogController {
 
   async create(req: Request, res: Response): Promise<void> {
     const {
-      event_type,
+      eventType,
       action,
-      old_data,
-      new_data,
-      changed_by,
-      changed_at,
-      client_ip,
-      user_agent
+      oldData,
+      newData,
+      changedBy,
+      changedAt,
+      clientIp,
+      userAgent
     } = req.body
 
     const newActivityLog = await this.logActionUseCase.execute({
-      event_type,
+      eventType,
       action,
-      old_data,
-      new_data,
-      changed_by,
-      changed_at,
-      client_ip,
-      user_agent
+      oldData,
+      newData,
+      changedBy,
+      changedAt,
+      clientIp,
+      userAgent
     })
     res.status(201).json(newActivityLog)
   }

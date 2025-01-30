@@ -5,6 +5,6 @@ export default class LogActionUseCase {
   constructor(private activityLogRepositoryMongo: ActivityLogRepositoryMongo) {}
 
   async execute(logData: ActivityLog): Promise<ActivityLog> {
-    return  this.activityLogRepositoryMongo.logAction(logData)
+    return this.activityLogRepositoryMongo.logAction(logData)
   }
 }

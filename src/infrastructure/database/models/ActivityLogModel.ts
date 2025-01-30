@@ -3,14 +3,14 @@ import ActivityLog from "~/domain/entities/ActivityLog"
 
 const ActivityLogSchema = new Schema<ActivityLog>(
   {
-    event_type: { type: String, enum: ['Transaction', 'User'], required: true },
+    eventType: { type: String, enum: ['Transaction', 'User'], required: true },
     action: { type: String, required: true },
-    old_data: { type: Schema.Types.Mixed },
-    new_data: { type: Schema.Types.Mixed, required: true },
-    changed_by: { type: Object, required: true },
-    changed_at: { type: Date, required: true },
-    client_ip: { type: String },
-    user_agent: { type: Object },
+    oldData: { type: Schema.Types.Mixed },
+    newData: { type: Schema.Types.Mixed },
+    changedBy: { type: Object, required: true },
+    changedAt: { type: Date, required: true },
+    clientIp: { type: String },
+    userAgent: { type: Object },
   }
 )
 

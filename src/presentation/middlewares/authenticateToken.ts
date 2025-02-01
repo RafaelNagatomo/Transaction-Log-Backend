@@ -6,7 +6,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   const token = req.header('Authorization')?.replace('Bearer ', '')
 
   if (!token) {
-    res.status(401).json({ message: 'Token não fornecido' })
+    res.status(401).json({ message: 'Token not provided' })
     return
   }
 
@@ -19,15 +19,15 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   jwt.verify(token, secret, (err, decoded) => {
     if (err) {
       if (err.name === 'TokenExpiredError') {
-        return res.status(401).json({ message: 'Token expirado' })
+        return res.status(401).json({ message: 'Expired token' })
       }
-      return res.status(403).json({ message: 'Token inválido', error: err.message })
+      return res.status(403).json({ message: 'Invalid token', error: err.message })
     }
 
     if (typeof decoded === 'object' && decoded !== null) {
       userService.setUser(decoded)
     } else {
-      return res.status(403).json({ message: 'Token inválido' })
+      return res.status(403).json({ message: 'Invalid token' })
     }
 
     next()

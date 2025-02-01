@@ -15,8 +15,8 @@ export default class ActivityLogController {
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
-    const getAllTransactions = await this.findAllLogsUseCase.execute()
-    res.status(200).json(getAllTransactions)
+    const getAllLogs = await this.findAllLogsUseCase.execute()
+    res.status(200).json(getAllLogs)
   }
 
   async create(req: Request, res: Response): Promise<void> {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import AuthController from '~/presentation/controllers/AuthControllers'
+import AuthController from '~/presentation/controllers/AuthController'
 import RegisterUserUseCase from '~/application/auth/RegisterUserUseCase'
 import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
 import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'

@@ -7,7 +7,7 @@ import AuthService from '~/domain/services/AuthService'
 import RegisterUserUseCase from '~/application/auth/RegisterUserUseCase'
 import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
 import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'
-import AuthController from '~/presentation/controllers/AuthControllers'
+import AuthController from '~/presentation/controllers/AuthController'
 
 let mongoServer: MongoMemoryServer
 

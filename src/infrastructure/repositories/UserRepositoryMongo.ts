@@ -13,6 +13,19 @@ export default class UserRepositoryMongo implements IUserRepository {
     }
   }
 
+  async findAllUsers(): Promise<User[]> {
+    try {
+      const users = await UserModel.find()
+      .sort({ name: 1 })
+      .exec()
+
+      return users.map(user => user.toObject())
+    } catch (error) {
+      console.error('Error to get all users:', error)
+      throw new Error('Failed to get all users')
+    }
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     try {
       const user = await UserModel.findOne({ email }).exec()

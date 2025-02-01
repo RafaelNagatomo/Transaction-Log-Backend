@@ -7,6 +7,7 @@ import transactionRoutes from './presentation/routes/transactionRoutes'
 import activityLogRoutes from './presentation/routes/activityLogRoutes'
 import "./infrastructure/events/transactionListener"
 import { authenticateToken } from './presentation/middlewares/authenticateToken'
+import userRoutes from './presentation/routes/userRoutes'
 
 dotenv.config()
 const PORT = process.env.PORT || 4000
@@ -21,6 +22,7 @@ app.use(authenticateToken)
 
 app.use('/transactions', transactionRoutes)
 app.use('/activitylogs', activityLogRoutes)
+app.use('/users', userRoutes)
 
 connectDB()
 

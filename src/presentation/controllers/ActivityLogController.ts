@@ -15,7 +15,21 @@ export default class ActivityLogController {
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
-    const getAllLogs = await this.findAllLogsUseCase.execute()
+    const filters = {
+      changedBy: req.query.changedBy
+        ? req.query.changedBy as string
+        : undefined,
+      action: req.query.action as string,
+      startDate: req.query.startDate
+        ? new Date(req.query.startDate as string).toISOString()
+        : undefined,
+      endDate: req.query.endDate
+        ? new Date(req.query.endDate as string).toISOString()
+        : undefined,
+      userAgent: req.query.userAgent as string,
+    }    
+
+    const getAllLogs = await this.findAllLogsUseCase.execute(filters)
     res.status(200).json(getAllLogs)
   }
 

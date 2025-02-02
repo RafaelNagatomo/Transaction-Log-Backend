@@ -11,7 +11,11 @@ export default class UserController {
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
-    const getAllUsers = await this.findAllUsersUseCase.execute()
-    res.status(200).json(getAllUsers)
+    try { 
+      const getAllUsers = await this.findAllUsersUseCase.execute()
+      res.status(200).json(getAllUsers)
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 }

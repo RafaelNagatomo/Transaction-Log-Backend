@@ -18,18 +18,27 @@ export default class AuthService {
     email: string,
     password: string
   ): Promise<User> {
-    try{
-      const hashedPassword = await bcrypt.hash(password, 10)
-      const user = await this.userRepositoryMongo.createUser({
-        name,
-        email,
-        password: hashedPassword
-      })
-      return user
-    } catch (error) {
-      console.error('Error during registration:', error)
-      throw new Error('Registration failed')
+    if (!name) {
+      throw new Error("Name is required")
     }
+
+    if (!email) {
+      throw new Error("Email is required")
+    }
+
+    if (!password) {
+      throw new Error("Password is required")
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const user = await this.userRepositoryMongo.createUser({
+      name,
+      email,
+      password: hashedPassword
+    })
+
+    return user
   }
 
   async login(
@@ -40,16 +49,22 @@ export default class AuthService {
     token: string
   }> {
     const user = await this.userRepositoryMongo.findByEmail(email)
-    if (!user) throw new Error('User not found')
+    if (!user) {
+      throw new Error('User not found')
+    }
 
-    if (!user.password) throw new Error('User password is undefined')
+    if (!user.password) {
+      throw new Error('User password is undefined')
+    }
       
     const isValidPassword = await bcrypt.compare(password, user.password)
-    if (!isValidPassword) throw new Error('Invalid password')
+    if (!isValidPassword) {
+      throw new Error('Invalid password')
+    }
 
     const { password: _, ...userWithoutPassword } = user
-
     const token = JwtUtils.generateToken({ user: user })
+
     return { user: userWithoutPassword, token }
   }
 

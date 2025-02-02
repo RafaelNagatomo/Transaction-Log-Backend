@@ -10,55 +10,40 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
     clientIp: string, 
     userAgent: string
   ): Promise<Transaction | null> {
-    try {
-      const currentUser = userService.getUser()
-      
-      const newTransaction = await TransactionModel.create(transaction)
-      
-      if (newTransaction) {
-        eventEmitter.emit("transactionCreated", {
-          eventType: 'Transaction',
-          action: 'Create',
-          oldData: null,
-          newData: newTransaction.toObject(),
-          changedBy: currentUser?.user,
-          changedAt: Date.now(),
-          clientIp: clientIp,
-          userAgent: userAgent
-        })
-      }
-
-      return newTransaction.toObject()
-    } catch (error) {
-      console.error('Error creating transaction:', error)
-      throw new Error('Failed to create transaction')
+    const currentUser = userService.getUser()
+    
+    const newTransaction = await TransactionModel.create(transaction)
+    
+    if (newTransaction) {
+      eventEmitter.emit("transactionCreated", {
+        eventType: 'Transaction',
+        action: 'Create',
+        oldData: null,
+        newData: newTransaction.toObject(),
+        changedBy: currentUser?.user,
+        changedAt: Date.now(),
+        clientIp: clientIp,
+        userAgent: userAgent
+      })
     }
+
+    return newTransaction.toObject()
   }
 
   async findAllTransactions(): Promise<Transaction[]> {
-    try {
-      const transactions = await TransactionModel.find()
-      .sort({ createdAt: -1 })
-      .exec()
+    const transactions = await TransactionModel.find()
+    .sort({ createdAt: -1 })
+    .exec()
 
-      return transactions.map(transaction => transaction.toObject())
-    } catch (error) {
-      console.error('Error to get all transactions:', error)
-      throw new Error('Failed to get all transactions')
-    }
+    return transactions.map(transaction => transaction.toObject())
   }
 
   async findTransactionById(id: string): Promise<Transaction | null> {
-    try {
-      const transaction = await TransactionModel
-      .findById(id)
-      .exec()
-      
-      return transaction ? transaction.toObject() : null
-    } catch (error) {
-      console.error('Error to get transaction:', error)
-      throw new Error('Failed to get transaction')
-    }
+    const transaction = await TransactionModel
+    .findById(id)
+    .exec()
+    
+    return transaction ? transaction.toObject() : null
   }
 
   async updateTransaction(
@@ -66,38 +51,30 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
     clientIp: string, 
     userAgent: string
   ): Promise<Transaction | null> {
-    try {
-      const currentUser = userService.getUser()
+    const currentUser = userService.getUser()
 
-      const oldTransaction = await TransactionModel.findById(transaction._id)
-      if (!oldTransaction) {
-        throw new Error('Failed to get old transaction')
-      }
+    const oldTransaction = await TransactionModel.findById(transaction._id)
 
-      const updatedTransaction = await TransactionModel.findByIdAndUpdate(
-        transaction._id,
-        { ...transaction },
-        { new: true }
-      ).exec()
+    const updatedTransaction = await TransactionModel.findByIdAndUpdate(
+      transaction._id,
+      { ...transaction },
+      { new: true }
+    ).exec()
 
-      if (updatedTransaction) {
-        eventEmitter.emit("transactionUpdated", {
-          eventType: 'Transaction',
-          action: 'Update',
-          oldData: oldTransaction.toObject(),
-          newData: updatedTransaction.toObject(),
-          changedBy: currentUser?.user,
-          changedAt: Date.now(),
-          clientIp: clientIp,
-          userAgent: userAgent
-        })
-      }
-
-      return updatedTransaction ? updatedTransaction.toObject() : null
-    } catch (error) {
-      console.error('Error to update transaction:', error)
-      throw new Error('Failed to update transaction')
+    if (updatedTransaction) {
+      eventEmitter.emit("transactionUpdated", {
+        eventType: 'Transaction',
+        action: 'Update',
+        oldData: oldTransaction?.toObject() ?? null,
+        newData: updatedTransaction.toObject(),
+        changedBy: currentUser?.user,
+        changedAt: Date.now(),
+        clientIp: clientIp,
+        userAgent: userAgent
+      })
     }
+
+    return updatedTransaction ? updatedTransaction.toObject() : null
   }
 
   async deleteTransaction(
@@ -105,35 +82,27 @@ export default class TransactionRepositoryMongo implements ITransactionRepositor
     clientIp: string, 
     userAgent: string
   ): Promise<Transaction | null> {
-    try {
-      const currentUser = userService.getUser()
+    const currentUser = userService.getUser()
 
-      const oldTransaction = await TransactionModel.findById(id)
-      if (!oldTransaction) {
-        throw new Error('Failed to get old transaction')
-      }
+    const oldTransaction = await TransactionModel.findById(id)
 
-      const deletedTransaction = await TransactionModel
-      .findByIdAndDelete(id)
-      .exec()
+    const deletedTransaction = await TransactionModel
+    .findByIdAndDelete(id)
+    .exec()
 
-      if (deletedTransaction) {
-        eventEmitter.emit("transactionDeleted", {
-          eventType: 'Transaction',
-          action: 'Delete',
-          oldData: oldTransaction.toObject(),
-          newData: null,
-          changedBy: currentUser?.user,
-          changedAt: Date.now(),
-          clientIp: clientIp,
-          userAgent: userAgent
-        })
-      }
-
-      return deletedTransaction
-    } catch (error) {
-      console.error('Error to delete transaction:', error)
-      throw new Error('Failed to delete transaction')
+    if (deletedTransaction) {
+      eventEmitter.emit("transactionDeleted", {
+        eventType: 'Transaction',
+        action: 'Delete',
+        oldData: oldTransaction?.toObject() ?? null,
+        newData: null,
+        changedBy: currentUser?.user,
+        changedAt: Date.now(),
+        clientIp: clientIp,
+        userAgent: userAgent
+      })
     }
+
+    return deletedTransaction
   }
 }

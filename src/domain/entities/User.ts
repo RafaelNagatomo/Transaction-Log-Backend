@@ -7,10 +7,6 @@ export default class User {
   readonly updatedAt?: Date
 
   constructor({ name, email, password }: User) {
-    if (!name || !email || !password) {
-      throw new Error('Missing required properties: name, email, password')
-    }
-    
     this.name = name
     this.email = email
     this.password = password

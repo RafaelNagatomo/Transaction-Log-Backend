@@ -27,10 +27,14 @@ export default class ActivityLogController {
         ? new Date(req.query.endDate as string).toISOString()
         : undefined,
       userAgent: req.query.userAgent as string,
-    }    
+    }
 
-    const getAllLogs = await this.findAllLogsUseCase.execute(filters)
-    res.status(200).json(getAllLogs)
+    try {
+      const getAllLogs = await this.findAllLogsUseCase.execute(filters)
+      res.status(200).json(getAllLogs)
+    } catch (error:any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 
   async create(req: Request, res: Response): Promise<void> {
@@ -45,16 +49,20 @@ export default class ActivityLogController {
       userAgent
     } = req.body
 
-    const newActivityLog = await this.logActionUseCase.execute({
-      eventType,
-      action,
-      oldData,
-      newData,
-      changedBy,
-      changedAt,
-      clientIp,
-      userAgent
-    })
-    res.status(201).json(newActivityLog)
+    try {
+      const newActivityLog = await this.logActionUseCase.execute({
+        eventType,
+        action,
+        oldData,
+        newData,
+        changedBy,
+        changedAt,
+        clientIp,
+        userAgent
+      })
+      res.status(201).json(newActivityLog)
+    } catch (error:any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 }

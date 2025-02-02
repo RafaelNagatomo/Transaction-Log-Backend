@@ -45,13 +45,14 @@ export default class AuthController {
       return
     }
 
-    try {
-      const token = req.header('Authorization')?.replace('Bearer ', '')
-      if (!token) {
-        throw new Error('Token not provided')
-      }
+    const token = req.header('Authorization')?.replace('Bearer ', '')
+    if (!token) {
+      throw new Error('Token not provided')
+    }
 
+    try {
       await this.logoutUserUseCase.execute(token)
+      
       res.status(200).json({ message: 'Logged out successfully' })
     } catch (error: any) {
       res.status(400).json({ error: error.message })

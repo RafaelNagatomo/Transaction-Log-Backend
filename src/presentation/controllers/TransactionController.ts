@@ -39,32 +39,44 @@ export default class TransactionController {
 
     const { clientIp, userAgent } = getClientInfo(req)
 
-    const createTransaction = await this.createTransactionUseCase.execute({
-      createdBy,
-      type,
-      amount,
-      description,
-      status,
-      isActive
-    },
-      clientIp,
-      userAgent
-    )
-
-    res.status(201).json(createTransaction)
+    try {
+      const createTransaction = await this.createTransactionUseCase.execute({
+        createdBy,
+        type,
+        amount,
+        description,
+        status,
+        isActive
+      },
+        clientIp,
+        userAgent
+      )
+      res.status(201).json(createTransaction)
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 
   async getAll(req: Request, res: Response): Promise<void> {
-    const getAllTransactions = await this.findAllTransactionsUseCase.execute()
+    try {
+      const getAllTransactions = await this.findAllTransactionsUseCase.execute()
 
-    res.status(200).json(getAllTransactions)
+      res.status(200).json(getAllTransactions)
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 
   async getById(req: Request, res: Response): Promise<void> {
     const { id } = req.body
-    const getTransaction = await this.findTransactionByIdUseCase.execute(id)
 
-    res.status(200).json(getTransaction)
+    try {
+      const getTransaction = await this.findTransactionByIdUseCase.execute(id)
+
+      res.status(200).json(getTransaction)
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 
   async update(req: Request, res: Response): Promise<void> {
@@ -80,32 +92,40 @@ export default class TransactionController {
 
     const { clientIp, userAgent } = getClientInfo(req)
     
-    const updateTransaction = await this.updateTransactionUseCase.execute({
-      _id,
-      createdBy,
-      type,
-      amount,
-      description,
-      status,
-      isActive
-    },
-      clientIp,
-      userAgent
-    )
+    try {
+      const updateTransaction = await this.updateTransactionUseCase.execute({
+        _id,
+        createdBy,
+        type,
+        amount,
+        description,
+        status,
+        isActive
+      },
+        clientIp,
+        userAgent
+      )
 
-    res.status(200).json(updateTransaction)
+      res.status(200).json(updateTransaction)
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 
   async delete(req: Request, res: Response): Promise<void> {
     const { _id } = req.body
     const { clientIp, userAgent } = getClientInfo(req)
 
-    const getTransaction = await this.deleteTransactionUseCase.execute(
-      _id,
-      clientIp,
-      userAgent
-    )
-    
-    res.status(200).json(getTransaction)
+    try {
+      const getTransaction = await this.deleteTransactionUseCase.execute(
+        _id,
+        clientIp,
+        userAgent
+      )
+      
+      res.status(200).json(getTransaction)
+    } catch (error: any) {
+      res.status(400).json({ error: error.message })
+    }
   }
 }

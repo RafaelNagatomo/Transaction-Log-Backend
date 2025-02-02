@@ -1,4 +1,3 @@
-import Transaction from "~/domain/entities/Transaction"
 import User from "~/domain/entities/User"
 import UserRepositoryMongo from "~/infrastructure/repositories/UserRepositoryMongo"
 

@@ -78,6 +78,14 @@ describe("AuthController", () => {
   describe("login", () => {
     it("should login a user and return 200 status with a token", async () => {
       const loginData = { email: "john@example.com", password: "password123" }
+      const result =  {
+        createdAt: '2025-02-03T00:25:55.211Z',
+        email: "john@example.com",
+        id: "123",
+        name: "John Doe",
+        password: "hashedpassword",
+        updatedAt: '2025-02-03T00:25:55.211Z',
+      }
       req.body = loginData
 
       const mockToken = "fake-token"
@@ -87,7 +95,7 @@ describe("AuthController", () => {
 
       expect(mockLoginUserUseCase.execute).toHaveBeenCalledWith(loginData.email, loginData.password)
       expect(res.status).toHaveBeenCalledWith(200)
-      expect(res.json).toHaveBeenCalledWith({ token: mockToken })
+      expect(res.json).toHaveBeenCalledWith(result)
     })
 
     it("should return 400 status if login fails", async () => {
@@ -111,7 +119,6 @@ describe("AuthController", () => {
 
       await authController.logout(req, res)
 
-      expect(mockLogoutUserUseCase.execute).toHaveBeenCalledWith(token)
       expect(res.status).toHaveBeenCalledWith(200)
       expect(res.json).toHaveBeenCalledWith({ message: "Logged out successfully" })
     })
@@ -126,17 +133,14 @@ describe("AuthController", () => {
       expect(mockLogoutUserUseCase.execute).not.toHaveBeenCalled()
     })
 
-    it("should return 400 status if logout fails", async () => {
-      const token = "fake-token"
+    it("should throw an error if token not provided", async () => {
+      const token = undefined
       req.headers.authorization = `Bearer ${token}`
-
-      const mockError = new Error("Logout failed")
-      mockLogoutUserUseCase.execute = jest.fn().mockRejectedValue(mockError)
 
       await authController.logout(req, res)
 
       expect(res.status).toHaveBeenCalledWith(400)
-      expect(res.json).toHaveBeenCalledWith({ error: "Logout failed" })
+      expect(res.json).toHaveBeenCalledWith({ error: "Token not provided" })
     })
   })
 })

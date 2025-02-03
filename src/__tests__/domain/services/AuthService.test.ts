@@ -15,6 +15,7 @@ describe("AuthService", () => {
   beforeEach(() => {
     mockUserRepository = {
       createUser: jest.fn(),
+      findAllUsers: jest.fn(),
       findByEmail: jest.fn(),
       findById: jest.fn(),
     }
@@ -50,6 +51,21 @@ describe("AuthService", () => {
       })
       expect(result).toEqual(mockUser)
     })
+  
+    it('should throw an error if name is not provided', async () => {
+      const result = await authService.register("", "john@example.com", "password123")
+      await expect(result).rejects.toThrow('Name is required')
+    })
+  
+    it('should throw an error if email is not provided', async () => {
+      const result = await authService.register("John Doe", "", "password123")
+      await expect(result).rejects.toThrow('Email is required')
+    })
+  
+    it('should throw an error if password is not provided', async () => {
+      const result = await authService.register("John Doe", "john@example.com", "")
+      await expect(result).rejects.toThrow('Password is required')
+    })
   })
 
   describe("login", () => {
@@ -80,6 +96,15 @@ describe("AuthService", () => {
 
       await expect(authService.login("john@example.com", "wrongpassword")).rejects.toThrow(
         "Invalid password"
+      )
+    })
+
+    it('should throw an error if user.password is undefined', async () => {
+      const userWithoutPassword = { email: 'test@example.com', password: undefined }
+      mockUserRepository.findByEmail = jest.fn().mockResolvedValue(userWithoutPassword)
+      
+      await expect(authService.login('test@example.com', 'password123')).rejects.toThrow(
+        'User password is undefined'
       )
     })
   })

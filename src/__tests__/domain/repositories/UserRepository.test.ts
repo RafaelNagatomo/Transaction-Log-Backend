@@ -8,6 +8,7 @@ describe("UserRepository (Domain Interface)", () => {
   beforeEach(() => {
     userRepository = {
       createUser: jest.fn(),
+      findAllUsers: jest.fn(),
       findByEmail: jest.fn(),
       findById: jest.fn(),
     }
@@ -34,6 +35,36 @@ describe("UserRepository (Domain Interface)", () => {
 
       expect(userRepository.createUser).toHaveBeenCalledWith(mockUser)
       expect(result).toEqual(mockUser)
+    })
+  })
+
+  describe("findAllUsers", () => {
+    it("should find all users and return the users", async () => {
+      const mockUsers: User[] = [
+        {
+          id: "123",
+          name: "John Doe",
+          email: "john@example.com",
+          password: "password123",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },
+        {
+          id: "456",
+          name: "Mary",
+          email: "mary@example.com",
+          password: "password321",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ]
+
+      userRepository.findAllUsers = jest.fn().mockResolvedValue(mockUsers)
+
+      const result = await userRepository.findAllUsers()
+
+      expect(userRepository.findAllUsers).toHaveBeenCalled()
+      expect(result).toEqual(mockUsers)
     })
   })
 

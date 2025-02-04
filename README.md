@@ -1,7 +1,7 @@
-# TransferX
+# Transaction-Log-Backend
 
 ## 📌 Descrição
-O **TransferX** é uma API com princípios de Clean Arch e SOLID da aplicação de transação financeira, com a funcionalidade de registrar ações de um usuário para cada ação feita (CREATE, UPDATE, DELETE), permitindo também, ser visualizado em forma de histórico de ações.
+O **Transaction-Log-Backend** é uma API com princípios de Clean Arch e SOLID da aplicação de transação financeira, com a funcionalidade de registrar ações de um usuário para cada ação feita (CREATE, UPDATE, DELETE), permitindo também, ser visualizado em forma de histórico de ações.
 
 ## 🚀 Executar Projeto
 - Requisitos:

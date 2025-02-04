@@ -1,5 +1,5 @@
 import { JwtPayload } from "jsonwebtoken"
-import { userService } from "~/domain/services/UserService"
+import { userService } from "../../domain/services/UserService"
 
 describe("UserService", () => {
   const mockUser: JwtPayload = {

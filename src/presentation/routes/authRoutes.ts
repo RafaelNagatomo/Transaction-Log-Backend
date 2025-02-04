@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import AuthService from '~/domain/services/AuthService'
-import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
-import RegisterUserUseCase from '~/application/auth/RegisterUserUseCase'
-import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
+import AuthService from '../../domain/services/AuthService'
+import UserRepositoryMongo from '../../infrastructure/repositories/UserRepositoryMongo'
+import RegisterUserUseCase from '../../application/auth/RegisterUserUseCase'
+import LoginUserUseCase from '../../application/auth/LoginUserUseCase'
 import AuthController from '../controllers/AuthController'
-import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'
+import LogoutUserUseCase from '../../application/auth/LogoutUserUseCase'
 
 const authRouter: Router = Router()
 

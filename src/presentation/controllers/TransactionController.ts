@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
-import CreateTransactionUseCase from '~/application/transaction/CreateTransactionUseCase'
-import FindAllTransactionsUseCase from '~/application/transaction/FindAllTransactionsUseCase'
-import FindTransactionByIdUseCase from '~/application/transaction/FindTransactionByIdUseCase'
-import UpdateTransactionUseCase from '~/application/transaction/UpdateTransactionUseCase'
-import DeleteTransactionUseCase from '~/application/transaction/DeleteTransactionUseCase'
-import { getClientInfo } from '~/infrastructure/utils/getClientInfo'
+import CreateTransactionUseCase from '../../application/transaction/CreateTransactionUseCase'
+import FindAllTransactionsUseCase from '../../application/transaction/FindAllTransactionsUseCase'
+import FindTransactionByIdUseCase from '../../application/transaction/FindTransactionByIdUseCase'
+import UpdateTransactionUseCase from '../../application/transaction/UpdateTransactionUseCase'
+import DeleteTransactionUseCase from '../../application/transaction/DeleteTransactionUseCase'
+import { getClientInfo } from '../../infrastructure/utils/getClientInfo'
 
 export default class TransactionController {
   private createTransactionUseCase: CreateTransactionUseCase

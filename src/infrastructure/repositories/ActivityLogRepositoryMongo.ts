@@ -1,8 +1,8 @@
-import ActivityLog from "~/domain/entities/ActivityLog"
-import IActivityLogRepository from "~/domain/repositories/IActivityLogRepository"
+import ActivityLog from "../../domain/entities/ActivityLog"
+import IActivityLogRepository from "../../domain/repositories/IActivityLogRepository"
 import ActivityLogModel from "../database/models/ActivityLogModel"
 import activityLogFilters from "../filters/activityLogFilters"
-import { IActivityLogFilters } from "~/domain/entities/ActivityLogFilters"
+import { IActivityLogFilters } from "../../domain/entities/ActivityLogFilters"
 
 export default class ActivityLogRepositoryMongo implements IActivityLogRepository {
   async findAllLogs(filters: IActivityLogFilters = {}): Promise<ActivityLog[]> {

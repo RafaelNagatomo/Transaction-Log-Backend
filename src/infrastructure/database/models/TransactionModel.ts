@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import Transaction from '~/domain/entities/Transaction'
+import Transaction from '../../../domain/entities/Transaction'
 
 const TransactionSchema = new Schema<Transaction>(
   {

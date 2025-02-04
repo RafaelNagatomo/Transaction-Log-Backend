@@ -1,5 +1,5 @@
-import Transaction from "~/domain/entities/Transaction"
-import TransactionRepositoryMongo from "~/infrastructure/repositories/TransactionRepositoryMongo"
+import Transaction from "../../domain/entities/Transaction"
+import TransactionRepositoryMongo from "../../infrastructure/repositories/TransactionRepositoryMongo"
 
 export default class UpdateTransactionUseCase {
   constructor(private transactionRepositoryMongo: TransactionRepositoryMongo) {}

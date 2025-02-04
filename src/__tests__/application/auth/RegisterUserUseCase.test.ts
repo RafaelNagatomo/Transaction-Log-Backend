@@ -1,6 +1,6 @@
-import RegisterUserUseCase from "~/application/auth/RegisterUserUseCase"
-import User from "~/domain/entities/User"
-import AuthService from "~/domain/services/AuthService"
+import RegisterUserUseCase from "../../application/auth/RegisterUserUseCase"
+import User from "../../domain/entities/User"
+import AuthService from "../../domain/services/AuthService"
 
 describe("RegisterUser", () => {
   let registerUserUseCase: RegisterUserUseCase

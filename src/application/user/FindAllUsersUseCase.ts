@@ -1,5 +1,5 @@
-import User from "~/domain/entities/User"
-import UserRepositoryMongo from "~/infrastructure/repositories/UserRepositoryMongo"
+import User from "../../domain/entities/User"
+import UserRepositoryMongo from "../../infrastructure/repositories/UserRepositoryMongo"
 
 export default class FindAllUsersUseCase {
   constructor(private userRepositoryMongo: UserRepositoryMongo) {}

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import FindAllLogsUseCase from "~/application/activityLog/FindAllLogsUseCase"
-import LogActionUseCase from "~/application/activityLog/LogActionUseCase"
+import FindAllLogsUseCase from "../../application/activityLog/FindAllLogsUseCase"
+import LogActionUseCase from "../../application/activityLog/LogActionUseCase"
 
 export default class ActivityLogController {
     private findAllLogsUseCase: FindAllLogsUseCase

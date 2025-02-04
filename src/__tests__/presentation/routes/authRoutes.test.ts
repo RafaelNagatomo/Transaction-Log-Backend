@@ -2,12 +2,12 @@ import request from 'supertest'
 import express from 'express'
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
-import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
-import AuthService from '~/domain/services/AuthService'
-import RegisterUserUseCase from '~/application/auth/RegisterUserUseCase'
-import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
-import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'
-import AuthController from '~/presentation/controllers/AuthController'
+import UserRepositoryMongo from '../../infrastructure/repositories/UserRepositoryMongo'
+import AuthService from '../../domain/services/AuthService'
+import RegisterUserUseCase from '../../application/auth/RegisterUserUseCase'
+import LoginUserUseCase from '../../application/auth/LoginUserUseCase'
+import LogoutUserUseCase from '../../application/auth/LogoutUserUseCase'
+import AuthController from '../../presentation/controllers/AuthController'
 
 let mongoServer: MongoMemoryServer
 

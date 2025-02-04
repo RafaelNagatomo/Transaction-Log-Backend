@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose"
-import ActivityLog from "~/domain/entities/ActivityLog"
+import ActivityLog from "../../../domain/entities/ActivityLog"
 
 const ActivityLogSchema = new Schema<ActivityLog>(
   {

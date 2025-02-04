@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import RegisterUserUseCase from '~/application/auth/RegisterUserUseCase'
-import LoginUserUseCase from '~/application/auth/LoginUserUseCase'
-import LogoutUserUseCase from '~/application/auth/LogoutUserUseCase'
+import RegisterUserUseCase from '../../application/auth/RegisterUserUseCase'
+import LoginUserUseCase from '../../application/auth/LoginUserUseCase'
+import LogoutUserUseCase from '../../application/auth/LogoutUserUseCase'
 
 export default class AuthController {
   private registerUserUseCase: RegisterUserUseCase

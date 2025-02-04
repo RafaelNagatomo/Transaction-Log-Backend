@@ -1,8 +1,8 @@
 import { MongoMemoryServer } from "mongodb-memory-server"
 import mongoose from "mongoose"
-import User from "~/domain/entities/User"
-import UserModel from "~/infrastructure/database/models/UserModel"
-import UserRepositoryMongo from "~/infrastructure/repositories/UserRepositoryMongo"
+import User from "../../domain/entities/User"
+import UserModel from "../../infrastructure/database/models/UserModel"
+import UserRepositoryMongo from "../../infrastructure/repositories/UserRepositoryMongo"
 import bcrypt from 'bcrypt'
 
 describe('UserRepositoryMongo', () => {

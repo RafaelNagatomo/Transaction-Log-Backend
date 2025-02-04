@@ -1,7 +1,7 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import User from '../entities/User'
-import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
-import JwtUtils from '~/infrastructure/utils/jwtUtils'
+import UserRepositoryMongo from '../../infrastructure/repositories/UserRepositoryMongo'
+import JwtUtils from '../../infrastructure/utils/jwtUtils'
 import { userService } from './UserService'
 
 export default class AuthService {

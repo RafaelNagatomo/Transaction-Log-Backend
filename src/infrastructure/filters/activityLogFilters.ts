@@ -1,4 +1,4 @@
-import { IActivityLogFilters } from "~/domain/entities/ActivityLogFilters"
+import { IActivityLogFilters } from "../../domain/entities/ActivityLogFilters"
 
 export default function activityLogFilters(filters: IActivityLogFilters) {
   const query: any = {}

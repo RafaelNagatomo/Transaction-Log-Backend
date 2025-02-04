@@ -1,8 +1,8 @@
-import Transaction from "~/domain/entities/Transaction"
-import ITransactionRepository from "~/domain/repositories/ITransactionRepository"
+import Transaction from "../../domain/entities/Transaction"
+import ITransactionRepository from "../../domain/repositories/ITransactionRepository"
 import TransactionModel from "../database/models/TransactionModel"
 import { eventEmitter } from "../events/eventEmitter"
-import { userService } from "~/domain/services/UserService"
+import { userService } from "../../domain/services/UserService"
 
 export default class TransactionRepositoryMongo implements ITransactionRepository {
   async createTransaction(

@@ -1,6 +1,6 @@
 import express from 'express'
-import FindAllUsersUseCase from '~/application/user/FindAllUsersUseCase'
-import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
+import FindAllUsersUseCase from '../../application/user/FindAllUsersUseCase'
+import UserRepositoryMongo from '../../infrastructure/repositories/UserRepositoryMongo'
 import UserController from '../controllers/UserController'
 
 const activityLogRouter = express.Router()

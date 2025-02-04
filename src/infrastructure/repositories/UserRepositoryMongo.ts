@@ -1,5 +1,5 @@
-import User from "~/domain/entities/User"
-import IUserRepository from "~/domain/repositories/IUserRepository"
+import User from "../../domain/entities/User"
+import IUserRepository from "../../domain/repositories/IUserRepository"
 import UserModel from "../database/models/UserModel"
 
 export default class UserRepositoryMongo implements IUserRepository {

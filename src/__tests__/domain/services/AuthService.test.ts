@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt"
-import User from "~/domain/entities/User"
-import IUserRepository from "~/domain/repositories/IUserRepository"
-import AuthService from "~/domain/services/AuthService"
-import JwtUtils from '~/infrastructure/utils/jwtUtils'
+import User from "../../domain/entities/User"
+import IUserRepository from "../../domain/repositories/IUserRepository"
+import AuthService from "../../domain/services/AuthService"
+import JwtUtils from '../../infrastructure/utils/jwtUtils'
 
 jest.mock("bcrypt")
-jest.mock("~/infrastructure/utils/jwtUtils")
+jest.mock("../../infrastructure/utils/jwtUtils")
 
 describe("AuthService", () => {
   let authService: AuthService

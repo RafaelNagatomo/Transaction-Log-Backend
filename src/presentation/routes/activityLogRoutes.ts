@@ -1,8 +1,8 @@
 import express from 'express'
 import ActivityLogController from '../controllers/ActivityLogController'
-import ActivityLogRepositoryMongo from '~/infrastructure/repositories/ActivityLogRepositoryMongo'
-import FindAllLogsUseCase from '~/application/activityLog/FindAllLogsUseCase'
-import LogActionUseCase from '~/application/activityLog/LogActionUseCase'
+import ActivityLogRepositoryMongo from '../../infrastructure/repositories/ActivityLogRepositoryMongo'
+import FindAllLogsUseCase from '../../application/activityLog/FindAllLogsUseCase'
+import LogActionUseCase from '../../application/activityLog/LogActionUseCase'
 
 const activityLogRouter = express.Router()
 

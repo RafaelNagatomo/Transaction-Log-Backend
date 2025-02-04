@@ -1,8 +1,8 @@
-import UserRepositoryMongo from '~/infrastructure/repositories/UserRepositoryMongo'
-import User from '~/domain/entities/User'
-import FindAllUsersUseCase from '~/application/user/FindAllUsersUseCase';
+import UserRepositoryMongo from '../../infrastructure/repositories/UserRepositoryMongo'
+import User from '../../domain/entities/User'
+import FindAllUsersUseCase from '../../application/user/FindAllUsersUseCase';
 
-jest.mock('~/infrastructure/repositories/UserRepositoryMongo')
+jest.mock('../../infrastructure/repositories/UserRepositoryMongo')
 
 describe('FindAllUsersUseCase', () => {
   let findAllUsersUseCase: FindAllUsersUseCase;

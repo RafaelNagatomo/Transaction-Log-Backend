@@ -1,5 +1,5 @@
-import LoginUserUseCase from "~/application/auth/LoginUserUseCase"
-import AuthService from "~/domain/services/AuthService"
+import LoginUserUseCase from "../../application/auth/LoginUserUseCase"
+import AuthService from "../../domain/services/AuthService"
 
 describe("LoginUser", () => {
   let loginUserUseCase: LoginUserUseCase

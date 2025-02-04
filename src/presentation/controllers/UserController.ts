@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import FindAllUsersUseCase from '~/application/user/FindAllUsersUseCase'
+import FindAllUsersUseCase from '../../application/user/FindAllUsersUseCase'
 
 export default class UserController {
     private findAllUsersUseCase: FindAllUsersUseCase

@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo-transaction-log-v1
+    ports:
+      - "27017:27017"
+    networks:
+      - transaction-log-network
+
+  api:
+    build: .
+    container_name: transaction-log-backend-v1
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/api
+    command: npm start
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: "mongodb://mongo-transaction-log-v1:27017/transaction-log-db"
+    networks:
+      - transaction-log-network
+
+networks:
+  transaction-log-network:
+    driver: bridge

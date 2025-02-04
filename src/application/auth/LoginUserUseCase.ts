@@ -1,5 +1,5 @@
-import User from "~/domain/entities/User"
-import AuthService from "~/domain/services/AuthService"
+import User from "../../domain/entities/User"
+import AuthService from "../../domain/services/AuthService"
 
 export default class LoginUserUseCase {
   private readonly authService: AuthService

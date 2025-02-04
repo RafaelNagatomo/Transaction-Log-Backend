@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import jwtUtils from '~/infrastructure/utils/jwtUtils'
+import jwtUtils from '../../infrastructure/utils/jwtUtils'
 
 jest.mock('jsonwebtoken')
 

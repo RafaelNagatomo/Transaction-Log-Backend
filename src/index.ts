@@ -1,8 +1,8 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import connectDB from '~/infrastructure/database/config/database'
-import authRoutes from '~/presentation/routes/authRoutes'
+import connectDB from './infrastructure/database/config/database'
+import authRoutes from './presentation/routes/authRoutes'
 import transactionRoutes from './presentation/routes/transactionRoutes'
 import activityLogRoutes from './presentation/routes/activityLogRoutes'
 import "./infrastructure/events/transactionListener"
@@ -16,13 +16,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use('/auth', authRoutes)
+app.use('/api/auth', authRoutes)
 
 app.use(authenticateToken)
 
-app.use('/transactions', transactionRoutes)
-app.use('/activitylogs', activityLogRoutes)
-app.use('/users', userRoutes)
+app.use('/api/transactions', transactionRoutes)
+app.use('/api/activitylogs', activityLogRoutes)
+app.use('/api/users', userRoutes)
 
 connectDB()
 

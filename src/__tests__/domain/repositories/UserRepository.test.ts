@@ -1,5 +1,5 @@
-import User from "~/domain/entities/User"
-import IUserRepository from "~/domain/repositories/IUserRepository"
+import User from "../../domain/entities/User"
+import IUserRepository from "../../domain/repositories/IUserRepository"
 
 describe("UserRepository (Domain Interface)", () => {
   let userRepository: IUserRepository
